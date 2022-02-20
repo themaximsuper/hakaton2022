@@ -7,12 +7,16 @@ w = 700
 win.geometry(f"600x700+10+20")
 win.title('Бот Валера')
 
+
 def get_entry():
     to_send = message.get()
+    text.config(state = 'normal')
     if to_send:
         text.insert(1.0, f'Вы: {to_send}')
+        text.config(state = 'disabled')
     else:
         text.insert(1.0, f'Валера: Введите команду!')
+        text.config(state = 'disabled')
  
 
 label1 = tkinter.Label(win, text = 'Сообщение')
@@ -25,10 +29,11 @@ button1 = tkinter.Button(win, text = 'Отправить!', command = get_entry)
 button1.grid(row = 0, column = 2)
 
 text = tkinter.Text(win, width = 40, height = 14)
+text.config(state = 'disabled')
 text.grid(row = 1, column = 1)
 
 scroll = tkinter.Scrollbar(win)
-scroll.grid(row = 1, column = 3)
+scroll.grid(row = 1, column = 3, rowspan = 3, stick = 'ns')
 
 text.config(yscrollcommand = scroll.set)
 
