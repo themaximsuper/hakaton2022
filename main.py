@@ -2,8 +2,11 @@ from time import sleep
 
 class iteration():
     
-    def __init__(self, number):
+    def __init__(self):
+        pass
 
+    def __call__(self, number):
+        
         self.number = number
         self.commands = [
             (
@@ -37,10 +40,6 @@ class iteration():
             )
         ]
 
-        pass
-
-    def __call__(self):
-        
         self.obj = self.commands[self.number]
         print(self.obj[0]+ '\n')
         for key in self.obj[1]:
@@ -68,7 +67,6 @@ class iteration():
             self.output = self.answer
         return self.output
 
-first = iteration(0)
-second = iteration(first())
-second()
+main = iteration()
+main(main(0))
 sleep(180)
