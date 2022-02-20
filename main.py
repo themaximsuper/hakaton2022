@@ -12,10 +12,10 @@ def get_entry():
     to_send = message.get()
     text.config(state = 'normal')
     if to_send:
-        text.insert(1.0, f'Вы: {to_send}')
+        text.insert(1.0, '\n' f'Вы: {to_send}')
         text.config(state = 'disabled')
     else:
-        text.insert(1.0, f'Валера: Введите команду!')
+        text.insert(1.0, '\n' f'Валера: Введите команду!')
         text.config(state = 'disabled')
  
 
