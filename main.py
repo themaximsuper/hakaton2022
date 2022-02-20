@@ -1,7 +1,7 @@
 from time import sleep
-import tkinter as tk
+import tkinter
 
-win = tk.Tk()
+win = tkinter.Tk()
 h = 600
 w = 700
 win.geometry(f"600x700+10+20")
@@ -9,18 +9,31 @@ win.title('Бот Валера')
 
 message_posX = 1
 message_posY = 1
+
 def get_entry():
     to_send = message.get()
     if to_send:
-        tk.Label(win, text = f'Вы: {to_send}').grid(row = message_posX, column = message_posY)
+        text.insert(1.0, f'Вы: {to_send}')
     else:
-        tk.Label(win, text = f'Валера: Введите команду!').grid(row = message_posX, column = message_posY)
+        text.insert(1.0, f'Валера: Введите команду!')
+ 
 
-tk.Label(win, text = 'Сообщение').grid(row = 0, column = 0)
-message = tk.Entry(win)
+label1 = tkinter.Label(win, text = 'Сообщение')
+label1.grid(row = 0, column = 0)
+
+message = tkinter.Entry(win)
 message.grid(row = 0, column = 1)
-tk.Button(win, text = 'Отправить!', command = get_entry).grid(row = 0, column = 2)
 
+button1 = tkinter.Button(win, text = 'Отправить!', command = get_entry)
+button1.grid(row = 0, column = 2)
+
+text = tkinter.Text(win, width = 40, height = 14)
+text.grid(row = 1, column = 1)
+
+scroll = tkinter.Scrollbar(win)
+scroll.grid(row = 1, column = 3)
+
+text.config(yscrollcommand = scroll.set)
 
 class iteration():
     
