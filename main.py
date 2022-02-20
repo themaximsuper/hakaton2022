@@ -1,4 +1,12 @@
 from time import sleep
+import tkinter as tk
+win = tk.Tk()
+hight = 600
+width = 700
+win.geometry(f"{hight}x{width}+100+200")
+win.title('Бот Валера')
+photo = tk.PhotoImage(file = 'bot.png')
+win.iconphoto(False, photo)
 
 class iteration():
     
@@ -70,3 +78,4 @@ class iteration():
 main = iteration()
 main(main(0))
 sleep(180)
+win.mainloop()
