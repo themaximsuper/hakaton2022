@@ -7,9 +7,6 @@ w = 700
 win.geometry(f"600x700+10+20")
 win.title('Бот Валера')
 
-message_posX = 1
-message_posY = 1
-
 def get_entry():
     to_send = message.get()
     if to_send:
