@@ -1,4 +1,3 @@
-from time import sleep
 import tkinter
 
 #Список команд
@@ -7,7 +6,7 @@ commands = [
         {
             "Общие сведения.":"Выберите одно из интересующих вас сведений:",
             "Контакты.":"Выберите один из представленных основных контактов:",
-            "Достижения.":"c.", 
+            "Достижения.":"Выберите интересующую вас сферу достижений:", 
             "Создатели бота.":"Для большей информации выберите одну из команд. Бота создали Малинкович Максим и Бобовников Арсений.", 
             "Общая контактная информация.":"Выберите одну из команд:"
          },
@@ -18,21 +17,25 @@ commands = [
             "Дата основания.":"Лицей№14 был образован в 1992 году.", 
             "Количество учащихся.":"На данный момент в нашем лицее учатся"\
                 "около 300 человек.",
-            "Количество учителей.":"На даннный момент в лицее преподает" \
-                "25 учителей."
+            "Количество учителей.":"На даннный момент в лицее преподают" \
+                " 25 учителей."
         },
     ),
 
     (
         {
-            "Директор Пилипенко Надежда Михайловна.":"Телефон: 8 496 577 00 82.",
-            "Заместитель директора Николева Светлана Генадьевна.":"Телефон: 8 496 574 34 84.",
-            "Заместитель директора по безопасности Новиков Александр Александрович.":"Телефон: +7 496 574 21 57."
+            "Директор.":"Пилипенко Надежда Михайловна, Телефон: 8 496 577 00 82.",
+            "Заместитель директора.":"Николаева Светлана Генадьевна, Телефон: 8 496 574 34 84.",
+            "Заместитель директора по безопасности.":"Новиков Александр Александрович, Телефон: +7 496 574 21 57."
         },
     ),
 
     (
-        {"1.3.1":"ca.", "1.3.2":"cb.", "1.3.3":"cc."},
+        {
+            "Топ по МСК области.":"МОУ'Лицей№14' входит в Топ-100 школ Подмосковья с 2018 года.",
+            "Активность.":"Ученики Лицея активно принимают участие в разных волонтерских и конкурсных мероприятиях.",
+            "Всероссийские олимпиады.":"Каждый год ученики МОУ'Лице№14' активно принимают участие и занимают призовые места во ВсОШ по всем предметам."
+        },
     ),
             
     (
@@ -67,15 +70,46 @@ win.resizable(False, True)
 class instruction(tkinter.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
-        self.text1 = tkinter.Text(self, width = 35, height = 15, font = 'Arial', wrap = 'word')
-        self.text1.config(yscrollcommand = 'scroll.set', state = 'disabled')
+        self.text1 = tkinter.Text(self, width = 50, height = 15, font = 'Courier', wrap = 'word')
+        self.text1.config(yscrollcommand = 'scroll.set')
         self.text1.grid(row = 1, column = 1)
-        self.button5 = tkinter.Button(self, text="Закрыть", command=self.destroy)
+        self.text1.insert(1.0,  
+                          'В данном руководстве вы можете найти все команды Бота Валеры.\n'\
+                          'Все доступные вам команды выводятся на экран.\n'\
+                          'Чтобы начать вводить команды, нажмите на кнопку "Начать диалог."\n'\
+                          'Чтобы ввести команду, кликните по полю ввода сверху и начните вводить команду в формате, указанном ботом.\n'\
+                          'Нажмите кнопку "Отправить", чтобы подтвердить ввод команды.\n'\
+                          'Колесиком мыши вы можете листать чат с ботом.\n'\
+"""    Команды первого уровня:
+-Общие сведения.
+-Контакты.
+-Достижения.
+-Создатели бота.
+-Общая контактная информация.
+    Команды второго уровня:
+-Дата основания.
+-Количество учащихся.
+-Количество учителей.
+-Директор.
+-Заместитель директора.
+-Заместитель директора по безопасности.
+-Эл.Почта.
+-Номер телефона.
+-Класс.
+-Адрес.
+-Адрес сайта.
+-Телефон.
+-Топ по МСК области.
+-Активность.
+-Всероссийские олимпиады."""
+                                )
+        self.button5 = tkinter.Button(self, text = "Закрыть", command = self.destroy)
         self.button5.grid(row = 3, column = 2)
         self.scroll1 = tkinter.Scrollbar(self)
         self.scroll1.grid(row = 0, column = 2, rowspan = 3, stick = 'ns')
-        
-        
+        self.label2 = tkinter.Label(self, text = '---Инструкция---')
+        self.label2.grid(row = 0, column = 1, columnspan = 2, stick = 'we')
+        self.text1.config(state = 'disabled')
 
 
 
@@ -88,40 +122,40 @@ def get_entry():
     if to_send:
         text.insert(1.0, '\n' f'Вы: {to_send}''\n')
         
-        #Просчет разветвлений
+        #Просчет разветвлений.
         if number == 0:
             if to_send == "Общие сведения.":
-                text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
                 number = 1
                 for key in commands[number][0]:
                     text.insert(1.0, key+"\n")
                 text.config(state = 'disabled')
             elif to_send == "Контакты.":
-                text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
                 number = 2
                 for key in commands[number][0]:
                     text.insert(1.0, key+"\n")
                 text.config(state = 'disabled')
             elif to_send == "Достижения.":
-                text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
                 number = 3
                 for key in commands[number][0]:
                     text.insert(1.0, key+"\n")
                 text.config(state = 'disabled')
             elif to_send == "Создатели бота.":
-                text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
                 number = 4
                 for key in commands[number][0]:
                     text.insert(1.0, key+"\n")
                 text.config(state = 'disabled')
             elif to_send == "Общая контактная информация.":
-                text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
                 number = 5
                 for key in commands[number][0]:
                     text.insert(1.0, key+"\n")
                 text.config(state = 'disabled')
             else:
-                text.insert(1.0, 'Валера: Введите правильную команду!\n')
+                text.insert(1.0,'\n' 'Валера: Введите правильную команду!\n')
                 text.config(state = 'disabled')
         #Проверка правильности ввода.
         else:
@@ -169,10 +203,11 @@ def instr_button():
     global win
     instr_win = instruction(win)
     instr_win.grab_set()
+    
 
     
  
-#Все надписи, кнопки, поля ввода и текстовые поля.
+#Объявление всех кнопок, надписей, полей ввода и текстовых полей.
 label1 = tkinter.Label(win, text = 'Сообщение:')
 label1.grid(row = 0, column = 0)
 
