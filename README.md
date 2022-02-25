@@ -8,6 +8,6 @@
 ### Требуемые библиотеки:
 - [Tkinter](https://docs.python.org/3/library/tkinter.html) (Встроенная библиотека Python 3.x)
 ## [terminal.py](./terminal.py)
-Программа протестирована на Python 3.10.
+Программа протестирована на Python 3.10. [Инструкция](/instruction.txt)
 ### Требуемые библиотеки:
 - [Time](https://docs.python.org/3/library/time.html) (Встроенная библиотека Python 3.x)
