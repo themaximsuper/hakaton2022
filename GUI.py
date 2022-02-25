@@ -1,6 +1,6 @@
 import tkinter
 
-#Список команд
+# Список команд.
 commands = [
     (
         {
@@ -55,7 +55,7 @@ commands = [
         },
     )
 ]  
-#Создаем основное окно.
+# Создаем основное окно.
 global win
 win = tkinter.Tk()
 h = 540
@@ -64,17 +64,17 @@ global number
 number = 0
 win.geometry(f"{w}x{h}")
 win.title('Бот Валера.')
-photo = tkinter.PhotoImage(file = 'bot.png')
+photo = tkinter.PhotoImage(file='bot.png')
 win.iconphoto(False, photo)
 win.resizable(False, True)
 
-#Создаем вспомогательное окно.
+# Создаем вспомогательное окно.
 class instruction(tkinter.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
-        self.instr_text = tkinter.Text(self, width = 50, height = 15, font = 'Courier', wrap = 'word')
-        self.instr_text.config(yscrollcommand = 'scroll.set')
-        self.instr_text.grid(row = 1, column = 1)
+        self.instr_text = tkinter.Text(self, width=50, height=15, font='Courier', wrap='word')
+        self.instr_text.config(yscrollcommand='scroll.set')
+        self.instr_text.grid(row=1, column=1)
         self.instr_text.insert(1.0,  
                           'В данном руководстве вы можете найти все команды Бота Валеры.\n'\
                           'Все доступные вам команды выводятся на экран.\n'\
@@ -104,89 +104,89 @@ class instruction(tkinter.Toplevel):
 -Топ по МСК области.
 -Активность.
 -Всероссийские олимпиады."""
-                                )
-        self.close_btn = tkinter.Button(self, text = "Закрыть", command = self.destroy)
-        self.close_btn.grid(row = 3, column = 2)
+            )
+        self.close_btn = tkinter.Button(self, text="Закрыть", command=self.destroy)
+        self.close_btn.grid(row=3, column=2)
         self.scroll1 = tkinter.Scrollbar(self)
-        self.scroll1.grid(row = 0, column = 2, rowspan = 3, stick = 'ns')
-        self.instr_label2 = tkinter.Label(self, text = '---Инструкция---')
-        self.instr_label2.grid(row = 0, column = 1, columnspan = 2, stick = 'we')
-        self.instr_text.config(state = 'disabled')
+        self.scroll1.grid(row=0, column=2, rowspan=3, stick='ns')
+        self.instr_label2 = tkinter.Label(self, text='---Инструкция---')
+        self.instr_label2.grid(row=0, column=1, columnspan=2, stick='we')
+        self.instr_text.config(state='disabled')
 
 
 
 
-#Функция считывания ввода пользователя.
+# Функция считывания ввода пользователя.
 def get_entry():
     global number
     to_send = message.get()
-    text.config(state = 'normal')
+    text.config(state='normal')
     if to_send:
         text.insert(1.0, '\n' f'Вы: {to_send}''\n')
         
-        #Просчет разветвлений.
+        # Просчет разветвлений.
         if number == 0:
             if to_send == "Общие сведения.":
-                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: " + commands[0][0][to_send] + "\n")
                 number = 1
                 for key in commands[number][0]:
-                    text.insert(1.0, key+"\n")
-                text.config(state = 'disabled')
+                    text.insert(1.0, key + "\n")
+                text.config(state='disabled')
             elif to_send == "Контакты.":
-                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: " + commands[0][0][to_send] + "\n")
                 number = 2
                 for key in commands[number][0]:
-                    text.insert(1.0, key+"\n")
-                text.config(state = 'disabled')
+                    text.insert(1.0, key + "\n")
+                text.config(state='disabled')
             elif to_send == "Достижения.":
-                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: " + commands[0][0][to_send] + "\n")
                 number = 3
                 for key in commands[number][0]:
-                    text.insert(1.0, key+"\n")
-                text.config(state = 'disabled')
+                    text.insert(1.0, key + "\n")
+                text.config(state='disabled')
             elif to_send == "Создатели бота.":
-                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: " + commands[0][0][to_send] + "\n")
                 number = 4
                 for key in commands[number][0]:
-                    text.insert(1.0, key+"\n")
-                text.config(state = 'disabled')
+                    text.insert(1.0, key + "\n")
+                text.config(state='disabled')
             elif to_send == "Общая контактная информация.":
-                text.insert(1.0,'\n' "Валера: "+commands[0][0][to_send]+"\n")
+                text.insert(1.0,'\n' "Валера: " + commands[0][0][to_send] + "\n")
                 number = 5
                 for key in commands[number][0]:
-                    text.insert(1.0, key+"\n")
-                text.config(state = 'disabled')
+                    text.insert(1.0, key + "\n")
+                text.config(state='disabled')
             else:
                 text.insert(1.0,'\n' 'Валера: Введите правильную команду!\n')
-                text.config(state = 'disabled')
-        #Проверка правильности ввода.
+                text.config(state='disabled')
+        # Проверка правильности ввода.
         else:
             try:
-                text.insert(1.0, "Валера: "+commands[number][0][to_send]+"\n")
+                text.insert(1.0, "Валера: " + commands[number][0][to_send] + "\n")
             except KeyError:
                 text.insert(1.0, 'Валера: Введите правильную команду!\n')
-        text.config(state = 'disabled')
+        text.config(state='disabled')
         message.delete(0, 'end')
     else:
         text.insert(1.0,  f'Валера: Введите команду!''\n')
-        text.config(state = 'disabled')
+        text.config(state='disabled')
         message.delete(0, 'end')
 
-#Очистка чата.
+# Очистка чата.
 def delete_everything():
     global number
     number = 0
-    start_btn.config(state = 'normal')
-    text.config(state = 'normal')
+    start_btn.config(state='normal')
+    text.config(state='normal')
     text.delete(1.0, 'end')
-    text.config(state = 'disabled')
-    send_btn.config(state = 'disabled')
+    text.config(state='disabled')
+    send_btn.config(state='disabled')
 
-#Начало диалога.
+# Начало диалога.
 def greeting():
-    start_btn.config(state = 'disabled')
-    send_btn.config(state = 'normal')
-    text.config(state = 'normal')
+    start_btn.config(state='disabled')
+    send_btn.config(state='normal')
+    text.config(state='normal')
     
     text.insert(1.0, 
                 '\n' 'Валера: Приветствую! Я - Валерий, помощник-секретарь МОУ "Лицей №14".'\
@@ -198,9 +198,9 @@ def greeting():
             text.insert(1.0, key + "\n")
     global number
     number = 0
-    text.config(state = 'disabled')
+    text.config(state='disabled')
 
-#Функционал кнопки вызова доп. окна.
+# Функционал кнопки вызова доп. окна.
 def instr_func():
     global win
     instr_win = instruction(win)
@@ -209,31 +209,31 @@ def instr_func():
 
     
  
-#Объявление всех кнопок, надписей, полей ввода и текстовых полей.
-send_label = tkinter.Label(win, text = 'Сообщение:')
-send_label.grid(row = 0, column = 0)
+# Объявление всех кнопок, надписей, полей ввода и текстовых полей.
+send_label = tkinter.Label(win, text='Сообщение:')
+send_label.grid(row=0, column=0)
 
 message = tkinter.Entry(win)
-message.grid(row = 0, column = 1, columnspan = 9, stick = 'we')
+message.grid(row=0, column=1, columnspan=9, stick='we')
 
-send_btn = tkinter.Button(win, text = 'Отправить.', command = get_entry, state = 'disabled')
-send_btn.grid(row = 0, column = 10, columnspan = 2, stick = 'we')
+send_btn = tkinter.Button(win, text='Отправить.', command=get_entry, state='disabled')
+send_btn.grid(row=0, column=10, columnspan=2, stick='we')
                                                                                                                                                                                                         
-eraze_btn = tkinter.Button(win, text = 'Очистить чат.', command = delete_everything)
-eraze_btn.grid(row = 5, column = 1, columnspan = 1, stick = 'we')
+eraze_btn = tkinter.Button(win, text='Очистить чат.', command=delete_everything)
+eraze_btn.grid(row=5, column=1, columnspan=1, stick='we')
 
-start_btn = tkinter.Button(win, text = 'Начать диалог.', command = greeting)
-start_btn.grid(row = 5, column = 0, stick = 'we')
+start_btn = tkinter.Button(win, text='Начать диалог.', command=greeting)
+start_btn.grid(row=5, column=0, stick='we')
 
-instr_btn = tkinter.Button(win, text = 'Инструкция.', command = instr_func)
-instr_btn.grid(row = 1, column = 0, columnspan = 1, stick = 'ns')
+instr_btn = tkinter.Button(win, text='Инструкция.', command=instr_func)
+instr_btn.grid(row=1, column=0, columnspan=1, stick='ns')
 
-text = tkinter.Text(win, width = 55, height = 25, font = 'Arial', wrap = 'word')
+text = tkinter.Text(win, width=55, height=25, font='Arial', wrap='word')
 text.config(state = 'disabled')
-text.grid(row = 1, column = 1)
+text.grid(row=1, column=1)
 
 scroll = tkinter.Scrollbar(win)
-scroll.grid(row = 1, column = 3, rowspan = 3,  stick = 'ns')
-text.config(yscrollcommand = 'scroll.set')
+scroll.grid(row=1, column=3, rowspan=3,  stick='ns')
+text.config(yscrollcommand='scroll.set')
 
 win.mainloop()
