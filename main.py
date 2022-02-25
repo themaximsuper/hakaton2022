@@ -64,6 +64,8 @@ global number
 number = 0
 win.geometry(f"{w}x{h}")
 win.title('Бот Валера.')
+photo = tkinter.PhotoImage(file = bot.png)
+win.iconphoto(False, photo)
 win.resizable(False, True)
 
 #Создаем вспомогательное окно.
