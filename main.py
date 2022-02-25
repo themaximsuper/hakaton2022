@@ -1,14 +1,15 @@
 from time import sleep
 import tkinter
 
-
+#Список команд
 commands = [
     (
         {
             "Общие сведения.":"Выберите одно из интересующих вас сведений:",
             "Контакты.":"Выберите один из представленных основных контактов:",
             "Достижения.":"c.", 
-            "Создатели бота.":"Для большей информации выберите одну из команд. Бота создали Малинкович Максим и Бобовников Арсений.", #"1.5":"e"
+            "Создатели бота.":"Для большей информации выберите одну из команд. Бота создали Малинкович Максим и Бобовников Арсений.", 
+            "Общая контактная информация":"Выберите одну из команд:"
          },
     ),
 
@@ -43,9 +44,15 @@ commands = [
     ),
 
     (
-        #{"1.5.1":"ea.", "1.5.2":"eb.", "1.5.3":"ec."},
+        
+        {
+            "Адрес.":"144000, Московская обл., г.Электросталь, проезд Чернышевского, д.22.",
+            "Адрес сайта.":"https://estalsch14.edumsko.ru/",
+            "Телефон.":"8 496 577 00 82."
+        },
     )
 ]  
+#Создаем основное окно.
 global win
 win = tkinter.Tk()
 h = 540
@@ -56,6 +63,7 @@ win.geometry(f"{w}x{h}")
 win.title('Бот Валера.')
 win.resizable(False, True)
 
+#Создаем вспомогательное окно.
 class instruction(tkinter.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
@@ -72,7 +80,7 @@ class instruction(tkinter.Toplevel):
 
 
 
-
+#Функция считывания ввода пользователя.
 def get_entry():
     global number
     to_send = message.get()
@@ -80,7 +88,7 @@ def get_entry():
     if to_send:
         text.insert(1.0, '\n' f'Вы: {to_send}''\n')
         
-        
+        #Просчет разветвлений
         if number == 0:
             if to_send == "Общие сведения.":
                 text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
@@ -106,22 +114,21 @@ def get_entry():
                 for key in commands[number][0]:
                     text.insert(1.0, key+"\n")
                 text.config(state = 'disabled')
-            #elif to_send == "1.5":
-                #text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
-                #number = 5
-                #for key in commands[number][0]:
-                    #text.insert(1.0, key+"\n")
-                #text.config(state = 'disabled')
+            elif to_send == "1.5":
+                text.insert(1.0, "Валера: "+commands[0][0][to_send]+"\n")
+                number = 5
+                for key in commands[number][0]:
+                    text.insert(1.0, key+"\n")
+                text.config(state = 'disabled')
             else:
                 text.insert(1.0, 'Валера: Введите правильную команду!\n')
                 text.config(state = 'disabled')
+        #Проверка правильности ввода.
         else:
             try:
                 text.insert(1.0, "Валера: "+commands[number][0][to_send]+"\n")
             except KeyError:
                 text.insert(1.0, 'Валера: Введите правильную команду!\n')
-            
-            
         text.config(state = 'disabled')
         message.delete(0, 'end')
     else:
@@ -129,6 +136,7 @@ def get_entry():
         text.config(state = 'disabled')
         message.delete(0, 'end')
 
+#Очистка чата.
 def delete_everything():
     global number
     number = 0
@@ -138,14 +146,11 @@ def delete_everything():
     text.config(state = 'disabled')
     button1.config(state = 'disabled')
 
-
+#Начало диалога.
 def greeting():
     button3.config(state = 'disabled')
     button1.config(state = 'normal')
     text.config(state = 'normal')
-
-    
-    #text.insert(1.0, "Валера: выберите нужную команду \n")
     
     text.insert(1.0, 
                 '\n' 'Вводите точки обязательно, а то я могу не разобраться!''\n'
@@ -158,6 +163,7 @@ def greeting():
     number = 0
     text.config(state = 'disabled')
 
+#Функционал кнопки вызова доп. окна.
 def instr_button():
     global win
     instr_win = instruction(win)
@@ -165,7 +171,7 @@ def instr_button():
 
     
  
-
+#Все надписи, кнопки, поля ввода и текстовые поля.
 label1 = tkinter.Label(win, text = 'Сообщение:')
 label1.grid(row = 0, column = 0)
 
